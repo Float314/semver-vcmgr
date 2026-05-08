@@ -101,3 +101,5 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 ### Long live free software!
+
+<img src="https://www.gnu.org/graphics/lgplv3-147x51.png" alt="Project Logo">
