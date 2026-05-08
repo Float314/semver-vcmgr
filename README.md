@@ -4,7 +4,7 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Float314/semver-vcmgr/multi-platform.yml)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/Float314/semver-vcmgr)
 ![GitHub top language](https://img.shields.io/github/languages/top/Float314/semver-vcmgr)
-![GitHub Release](https://img.shields.io/github/v/release/Float314/semver-vcmgr)
+![GitHub Tag](https://img.shields.io/github/v/tag/Float314/semver-vcmgr)
 
 This library allows you to set a specific version for your program inside the
 program, which allows you to not specify versions based on README.md documents
