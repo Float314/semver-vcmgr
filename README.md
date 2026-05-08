@@ -1,12 +1,15 @@
-# Version control Manager
+# semver-vcmgr - Semantic Version control manager and Comparison Utility 
 
 This library allows you to set a specific version for your program inside the
-program, which allows you to not specify versions based on README.md documents.
+program, which allows you to not specify versions based on README.md documents
+and probably git tags (idek)
 
 # How to use? 
 
-Easy, in your main.cpp (or any 'main' c++ file to compile), insert these lines 
+Easy! In your main.cpp (or any 'main' c++ file to compile), insert these lines 
 in the beginning of code 
+
+> Not necessary to be the main.cpp, but for code organisation :/ 
 
 ```cpp
 // ... (header files)
@@ -75,6 +78,8 @@ if(ReleaseType == "alpha" || ReleaseType == "beta") {
 
 Uh, yeah, thats it apparantly :/ (use code for details, my comments are *well* 
 documented and it is easy to read cause im just a C++ beginner lol)
+
+See the "real" implementation in examples/ 
 
 # License and Legal Stuff 
 
