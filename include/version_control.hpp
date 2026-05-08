@@ -1,0 +1,136 @@
+#pragma once
+
+#include <string>
+#include <vector>
+#include <sstream>
+#include <algorithm>
+
+struct VersionInfo {
+    int major{};
+    int minor{};
+    int subMinor{};
+    std::string releaseType;
+    int relTypeVersion{};
+};
+
+class program_version {
+private:
+    VersionInfo v;
+    std::vector<std::string> parts; // niche :/
+
+    void splitData(const std::string& input) {
+        parts.clear(); // clear any unused data if 
+        std::string raw = input;
+
+        std::replace(raw.begin(), raw.end(), '-', '.');
+
+        if (!raw.empty() && raw[0] == 'v') {
+            raw.erase(0, 1);
+        }
+
+        // lol idek what this shi does
+        std::stringstream ss(raw);
+        std::string segment;
+        while (std::getline(ss, segment, '.')) {
+            parts.push_back(segment); // split data into the vector.
+        }
+    }
+
+    /// @brief Assigns the Vectored info in the std::vector<>, converts major, minor and integer related thingys to int.
+    void assignData() {
+        if (parts.size() >= 1) v.major = std::stoi(parts[0]);
+        if (parts.size() >= 2) v.minor = std::stoi(parts[1]);
+        if (parts.size() >= 3) v.subMinor = std::stoi(parts[2]);
+        if (parts.size() >= 4) v.releaseType = parts[3];
+        if (parts.size() >= 5) v.relTypeVersion = std::stoi(parts[4]);
+    }
+
+    static VersionInfo parseVersionString(const std::string& ver) {
+        VersionInfo result;
+        std::string raw = ver;
+
+        std::replace(raw.begin(), raw.end(), '-', '.'); // replace every "-" with "." so we have only one dillemer to worry abt/
+
+        // remove the "v" as in "v1.0.1-beta-3" if present
+        if (!raw.empty() && raw[0] == 'v') {
+            raw.erase(0, 1);
+        }
+
+        std::stringstream ss(raw);
+        std::string segment;
+        std::vector<std::string> p;
+        while (std::getline(ss, segment, '.')) {
+            p.push_back(segment);
+        }
+
+        if (p.size() >= 1) result.major = std::stoi(p[0]);
+        if (p.size() >= 2) result.minor = std::stoi(p[1]);
+        if (p.size() >= 3) result.subMinor = std::stoi(p[2]);
+        if (p.size() >= 4) result.releaseType = p[3];
+        if (p.size() >= 5) result.relTypeVersion = std::stoi(p[4]);
+
+        return result;
+    }
+
+public:
+    std::string rawVersion;
+
+    // set this function as default
+    program_version() = default;
+
+    program_version(const std::string& ver) {
+        setProjVersion(ver);
+    } // hehe
+
+    program_version(const char* ver) {
+        setProjVersion(std::string(ver));
+    } // what the fuck did AI Review do
+
+    void setProjVersion(const std::string& inp) {
+        rawVersion = inp;
+        splitData(inp);
+        assignData();
+    } // nuh uh 
+
+    /*
+        Remember a while back i said that you can just version.major(); ? well, this is the implementation :/ 
+    */
+
+    int major() const { return v.major; }
+    int minor() const { return v.minor; }
+    int subMinor() const { return v.subMinor; }
+    std::string releaseType() const { return v.releaseType; }
+    int relTypeVersion() const { return v.relTypeVersion; }
+
+    /*
+    And remember a while back i said that you can
+
+    if(versionNo >= "v1.0.9") {do smth} ? 
+    Well, this is the implementarion
+    
+    */
+
+    bool operator<=(const std::string& otherVersion) const {
+        VersionInfo oth = parseVersionString(otherVersion);
+        if (v.major != oth.major) return v.major < oth.major;
+        if (v.minor != oth.minor) return v.minor < oth.minor;
+        return v.subMinor <= oth.subMinor;
+    }
+
+    bool operator>=(const std::string& otherVersion) const {
+        VersionInfo oth = parseVersionString(otherVersion);
+        if (v.major != oth.major) return v.major > oth.major;
+        if (v.minor != oth.minor) return v.minor > oth.minor;
+        return v.subMinor >= oth.subMinor;
+    }
+
+    bool operator==(const std::string& otherVersion) const {
+        VersionInfo oth = parseVersionString(otherVersion);
+        return v.major == oth.major && v.minor == oth.minor && v.subMinor == oth.subMinor;
+    }
+
+    bool operator!=(const std::string& otherVersion) const {
+        return !(*this == otherVersion);
+    }
+};
+// end (maybe)
