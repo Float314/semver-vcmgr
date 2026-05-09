@@ -160,5 +160,22 @@ public:
     bool operator!=(const std::string& otherVersion) const {
         return !(*this == otherVersion);
     }
+
+    // need code refining maybe ---------------------------------
+    bool operator<(const std::string& otherVersion) const {
+        VersionInfo oth = parseVersionString(otherVersion);
+        if(v.major < oth.major) return true;
+        else if(v.major > oth.major) return false;
+
+        return(v.subMinor < oth.subMinor);
+    }
+
+    bool operator>(const std::string& otherVersion) const {
+        VersionInfo oth = parseVersionString(otherVersion);
+        if(v.major > oth.major) return true;
+        else if(v.major < oth.major) return false;
+
+        return(v.subMinor > oth.subMinor);
+    }
 };
 // end (maybe)
