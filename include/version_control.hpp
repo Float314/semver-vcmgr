@@ -33,6 +33,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 #include <sstream>
 #include <algorithm>
 
+/// @brief Version Info, Major, minor, etc.
 struct VersionInfo {
     int major{};
     int minor{};
@@ -47,11 +48,12 @@ private:
     std::vector<std::string> parts; // niche :/
 
     void splitData(const std::string& input) {
-        parts.clear(); // clear any unused data if 
+        parts.clear(); // clear any unused junk data if 
         std::string raw = input;
 
-        std::replace(raw.begin(), raw.end(), '-', '.');
+        std::replace(raw.begin(), raw.end(), '-', '.'); // replace every "-" with "." so we have only one dillemer to worry abt
 
+        // nremove the "v" at start if it contains any :/
         if (!raw.empty() && raw[0] == 'v') {
             raw.erase(0, 1);
         }
@@ -73,6 +75,9 @@ private:
         if (parts.size() >= 5) v.relTypeVersion = std::stoi(parts[4]);
     }
 
+    /// @brief Parse Version String
+    /// @param ver std::string version
+    /// @return std::vector [major, minor, subMinor, releaseType, relTypeVersion]
     static VersionInfo parseVersionString(const std::string& ver) {
         VersionInfo result;
         std::string raw = ver;
@@ -114,6 +119,8 @@ public:
         setProjVersion(std::string(ver));
     } // what the fuck did AI Review do
 
+    /// @brief Set and parse Project Info
+    /// @param inp Input String
     void setProjVersion(const std::string& inp) {
         rawVersion = inp;
         splitData(inp);
@@ -124,10 +131,24 @@ public:
         Remember a while back i said that you can just version.major(); ? well, this is the implementation :/ 
     */
 
+    /// @brief Major Version of the version
+    /// @return An integer, the major number
     int major() const { return v.major; }
+
+    /// @brief Minor Version Number
+    /// @return Integer that is the minor version
     int minor() const { return v.minor; }
+
+    /// @brief SubMinor / Patch Version
+    /// @return Integer that is the Subminor/Patch No.
     int subMinor() const { return v.subMinor; }
+
+    /// @brief Release Type (Alpha, Beta, Pre-release etc.)
+    /// @return `std::string` releaseType. 
     std::string releaseType() const { return v.releaseType; }
+
+    /// @brief Release type patch No. (Like v1.0.9-beta-5, the 5)
+    /// @return An Integer that is the Alpha/Beta (smth idek :/ )
     int relTypeVersion() const { return v.relTypeVersion; }
 
     /*
@@ -138,6 +159,9 @@ public:
     
     */
 
+    /// @brief Operator <= to Compare Version Info
+    /// @param otherVersion Other Version
+    /// @return True or False based on the comparison
     bool operator<=(const std::string& otherVersion) const {
         VersionInfo oth = parseVersionString(otherVersion);
         if (v.major != oth.major) return v.major < oth.major;
@@ -145,6 +169,9 @@ public:
         return v.subMinor <= oth.subMinor;
     }
 
+    /// @brief Operator >= to Compare Version Info
+    /// @param otherVersion Other Version
+    /// @return True or False based on the comparison
     bool operator>=(const std::string& otherVersion) const {
         VersionInfo oth = parseVersionString(otherVersion);
         if (v.major != oth.major) return v.major > oth.major;
@@ -152,16 +179,26 @@ public:
         return v.subMinor >= oth.subMinor;
     }
 
+    /// @brief Operator == to Compare Version Info
+    /// @param otherVersion Other Version
+    /// @return True or False based on the comparison
     bool operator==(const std::string& otherVersion) const {
         VersionInfo oth = parseVersionString(otherVersion);
         return v.major == oth.major && v.minor == oth.minor && v.subMinor == oth.subMinor;
     }
 
+    /// @brief Operator != to Compare Version Info
+    /// @param otherVersion Other Version
+    /// @return True or False based on the comparison
     bool operator!=(const std::string& otherVersion) const {
         return !(*this == otherVersion);
     }
 
     // need code refining maybe ---------------------------------
+
+    /// @brief Operator < to Compare Version Info
+    /// @param otherVersion Other Version
+    /// @return True or False based on the comparison
     bool operator<(const std::string& otherVersion) const {
         VersionInfo oth = parseVersionString(otherVersion);
         if(v.major < oth.major) return true;
@@ -170,6 +207,9 @@ public:
         return(v.subMinor < oth.subMinor);
     }
 
+    /// @brief Operator > to Compare Version Info
+    /// @param otherVersion Other Version
+    /// @return True or False based on the comparison
     bool operator>(const std::string& otherVersion) const {
         VersionInfo oth = parseVersionString(otherVersion);
         if(v.major > oth.major) return true;
