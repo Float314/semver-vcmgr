@@ -42,6 +42,16 @@ struct VersionInfo {
     int relTypeVersion{};
 };
 
+/*
+    Program Version Info Class. Use it like this - 
+    `program_version ver = "v1.0.9-beta-4";` where v1.0.9-beta-4 is version you wanna specify 
+
+    Part of the "semver-vcmgr" Library.
+
+    Go to <https://github.com/Float314/semver-vcmgr> for details.
+
+    Copyright (C) 2026, Float314 and contributors. 
+*/
 class program_version {
 private:
     VersionInfo v;
