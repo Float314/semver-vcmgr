@@ -52,7 +52,7 @@ lacks many features, you can put an "if" statement like this -
 ```cpp
 if (someLibrarysVersion <= "v1.0.2-beta-2") {
     /* Error message like - 
-        std::cerr << "Update the Library to use this feature"
+        std::cerr << "Update the Library to use this feature" ... 
     */
 }
 
