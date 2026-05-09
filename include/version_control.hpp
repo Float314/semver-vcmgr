@@ -229,3 +229,14 @@ public:
     }
 };
 // end (maybe)
+
+/// @brief semver-vcmgr Info
+void __programVersionInfo() { 
+    std::cout 
+    << "semver-vcmgr by Float314 - \n"
+    << "Easy to use Semantic Version Manager and comparison Library. Lightweight \n"
+    << "And easy to use! Go to <https://github.com/Float314/semver-vcmgr> for \n"
+    << "details and to implement it yourself :) \n\n"
+    << "Copyright (C) 2026, Float314 and Contributors. Licensed under the GNU LGPL \n"
+    << "v3. Free as in Freedom!" << std::endl;
+}
