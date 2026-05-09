@@ -9,7 +9,7 @@ program_version Version = PROGRAM_VERSION;
 
 #endif
 
-int main() {
+int main(void) {
     auto major = Version.major();
     auto minor = Version.minor();
     auto subMinor = Version.subMinor();
@@ -43,6 +43,16 @@ int main() {
     if (Version != "v1.0.0-alpha-1") {
         std::cout << "This version is != v1.0.0-alpha-1\n";
     }
+
+    if (Version > "v1.0.0-alpha-2") {
+        std::cout << "This version > v1.0.0-alpha-2 \n" ;
+    }
+
+    if (Version < "v1.0.3-alpha-2") {
+        std::cout << "This version < v1.0.2-alpha-2\n";
+    }
+
+    std::cout << "TEST FINISHED! Report bugs at this repo = <https://github.com/Float314/semver-vcmgr>";
 
     return 0;
 }
