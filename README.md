@@ -89,7 +89,7 @@ See the "real" implementation in examples/
 
 # License and Legal Stuff 
 
-This license is licensed under the **GNU LGPL v3**. 
+This program is licensed under the **GNU LGPL v3**. 
 
 Copyright (c) 2026, Float314 (a.k.a. Cyphrixz) and all the Contributors
                     to this project (if any). 
