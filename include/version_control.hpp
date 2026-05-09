@@ -165,7 +165,7 @@ public:
     And remember a while back i said that you can
 
     if(versionNo >= "v1.0.9") {do smth} ? 
-    Well, this is the implementarion
+    Well, this is the implementation
     
     */
 
