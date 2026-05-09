@@ -48,7 +48,7 @@ struct VersionInfo {
 
     Part of the "semver-vcmgr" Library.
 
-    Go to <https://github.com/Float314/semver-vcmgr> for details.
+    Go to https://github.com/Float314/semver-vcmgr for details.
 
     Copyright (C) 2026, Float314 and contributors. 
 */
